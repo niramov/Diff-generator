@@ -1,19 +1,20 @@
 import { readFileSync } from "fs";
 import _ from 'lodash';
+import { resolve } from 'node:path';
+import { cwd } from 'node:process';
 
 export default ((filepath1, filepath2) => {
 
   const dataRead = (path) => readFileSync(path, 'utf-8');
-  const data1 = dataRead(filepath1);
-  const data2 = dataRead(filepath2);
+  const data1 = dataRead(resolve(cwd(), filepath1));
+  const data2 = dataRead(resolve(cwd(), filepath2));
 
   const parsedData1 = JSON.parse(data1);
   const parsedData2 = JSON.parse(data2);
 
   const keys1 = _.keys(parsedData1);
   const keys2 = _.keys(parsedData2);
-  const uniqueKeys = _.union(keys1, keys2);
-  uniqueKeys.sort()
+  const uniqueKeys = _.sortBy(_.union(keys1, keys2));
 
 const makeDiffTree = (names, data1, data2) => {
   const result = names.reduce((acc, item) => {

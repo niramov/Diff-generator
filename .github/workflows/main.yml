@@ -14,5 +14,5 @@ jobs:
       - name: Running linter
         run: make lint
       - name: Testing packet
-        run: make test
+        run: npm run test
         if: ${{ always() }}

@@ -21,9 +21,12 @@
   },
   "homepage": "https://github.com/niramov/frontend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^9.3.0"
+    "commander": "^9.3.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "lodash": "^4.17.21"
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
   }
 }

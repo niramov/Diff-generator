@@ -2,5 +2,5 @@ lint:
 	npx eslint .
 
 install:
-	npm link
+	npm install
 	

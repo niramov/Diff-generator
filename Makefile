@@ -2,5 +2,7 @@ lint:
 	npx eslint .
 
 install:
-	npm link
+	npm ci
+
+test:
 	

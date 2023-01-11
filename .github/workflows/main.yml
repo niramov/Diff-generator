@@ -14,9 +14,8 @@ jobs:
       - name: Running linter
         run: make lint
       - name: Testing packet
-<<<<<<< HEAD
         run: make test
-      name: Test & publish code coverage
+      - name: Test & publish code coverage
       # Publish code coverage on Code Climate
       # https://github.com/paambaati/codeclimate-action
         uses: paambaati/codeclimate-action@v3.0.0
@@ -25,8 +24,5 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: make test-coverage
-        debug: true
-=======
-        run: npm run test
-        if: ${{ always() }}
->>>>>>> e1087094bf138a8e729ab3c6ed42491db7599ced
+          debug: true
+

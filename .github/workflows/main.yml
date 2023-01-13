@@ -11,8 +11,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Installing packet
         run: make install
-      - name: Running linter
-        run: make lint
       - name: Test & publish code coverage
       # Publish code coverage on Code Climate
       # https://github.com/paambaati/codeclimate-action
@@ -25,3 +23,5 @@ jobs:
           debug: true
       - name: Testing packet
         run: make test
+      - name: Running linter
+        run: make lint

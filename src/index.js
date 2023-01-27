@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { resolve } from 'node:path';
 import { cwd } from 'node:process';
 
-export default ((filepath1, filepath2) => {
+const gendiff = (filepath1, filepath2) => {
   const dataRead = (path) => readFileSync(path, 'utf-8');
   const data1 = dataRead(resolve(cwd(), filepath1));
   const data2 = dataRead(resolve(cwd(), filepath2));
@@ -53,4 +53,6 @@ export default ((filepath1, filepath2) => {
   const result = `{\n${diffString}}`;
 
   return result;
-});
+};
+
+export default gendiff;

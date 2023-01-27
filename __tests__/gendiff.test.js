@@ -1,9 +1,11 @@
+/* eslint-disable no-undef */
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { readFileSync } from 'fs';
 
 import gendiff from '../src/index';
 
+/* eslint no-underscore-dangle: 0 */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 

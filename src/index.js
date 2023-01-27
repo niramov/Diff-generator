@@ -37,18 +37,19 @@ const gendiff = (filepath1, filepath2) => {
   const diffTree = makeDiffTree(uniqueKeys, parsedData1, parsedData2);
 
   const diffString = diffTree.reduce((acc, { node, value, status }) => {
+    let tempAcc = acc;
     if (status === 'stable') {
-      acc += `    ${node}: ${value}\n`;
+      tempAcc += `    ${node}: ${value}\n`;
     } else if (status === 'added') {
-      acc += `  + ${node}: ${value}\n`;
+      tempAcc += `  + ${node}: ${value}\n`;
     } else if (status === 'deleted') {
-      acc += `  - ${node}: ${value}\n`;
+      tempAcc += `  - ${node}: ${value}\n`;
     } else if (status === '1') {
-      acc += `  - ${node}: ${value}\n`;
+      tempAcc += `  - ${node}: ${value}\n`;
     } else {
-      acc += `  + ${node}: ${value}\n`;
+      tempAcc += `  + ${node}: ${value}\n`;
     }
-    return acc;
+    return tempAcc;
   }, '');
   const result = `{\n${diffString}}`;
 

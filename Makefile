@@ -1,12 +1,11 @@
-lint:
-	npx eslint .
+ lint:
+ 	npx eslint .
 
-install:
-	npm ci
+ install:
+ 	npm ci
 
-test-coverage:
-	npm test -- --coverage --coverageProvider=v8
+ test-coverage:
+ 	npm test -- --coverage --coverageProvider=v8
 
-test:
-	NODE_OPTIONS=--experimental-vm-modules npx jest
-	
+ test:
+ 	NODE_OPTIONS=--experimental-vm-modules npx jest

@@ -1,15 +1,26 @@
 import { readFileSync } from 'fs';
+import path from 'path';
 import _ from 'lodash';
 import { resolve } from 'node:path';
 import { cwd } from 'node:process';
+import { jsonParser, yamlParser } from './parsers.js';
 
 const gendiff = (filepath1, filepath2) => {
-  const dataRead = (path) => readFileSync(path, 'utf-8');
-  const data1 = dataRead(resolve(cwd(), filepath1));
-  const data2 = dataRead(resolve(cwd(), filepath2));
+  const dataRead = (filePath) => readFileSync(filePath, 'utf-8');
+  const path1 = resolve(cwd(), filepath1);
+  const path2 = resolve(cwd(), filepath2);
+  const data1 = dataRead(path1);
+  const data2 = dataRead(path2);
 
-  const parsedData1 = JSON.parse(data1);
-  const parsedData2 = JSON.parse(data2);
+  let parser;
+  if (path.extname(path1) === 'json') {
+    parser = jsonParser;
+  } else {
+    parser = yamlParser;
+  }
+
+  const parsedData1 = parser(data1);
+  const parsedData2 = parser(data2);
 
   const keys1 = _.keys(parsedData1);
   const keys2 = _.keys(parsedData2);

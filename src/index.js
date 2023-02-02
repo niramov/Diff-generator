@@ -64,7 +64,7 @@ const gendiff = (filepath1, filepath2) => {
   }, '');
   const result = `{\n${diffString}}`;
 
-  return result;
+  console.log(result);
 };
 
 export default gendiff;

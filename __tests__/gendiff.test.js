@@ -5,7 +5,6 @@ import { readFileSync } from 'fs';
 
 import gendiff from '../src/index.js';
 
-/* eslint no-underscore-dangle: 0 */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 

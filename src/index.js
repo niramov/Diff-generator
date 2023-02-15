@@ -14,49 +14,59 @@ const gendiff = (filepath1, filepath2) => {
   const parsedData1 = parser(path1, data1);
   const parsedData2 = parser(path2, data2);
 
-  const keys1 = _.keys(parsedData1);
-  const keys2 = _.keys(parsedData2);
-  const uniqueKeys = _.sortBy(_.union(keys1, keys2));
-
-  const makeDiffTree = (names, file1, file2) => {
-    const result = names.reduce((acc, item) => {
-      if (!_.has(file1, item)) {
-        acc.push({ node: item, value: file2[item], status: 'added' });
-      } else if (!_.has(file2, item)) {
-        acc.push({ node: item, value: file1[item], status: 'deleted' });
-      } else if (file1[item] === file2[item]) {
-        acc.push({ node: item, value: file2[item], status: 'stable' });
-      } else {
-        acc.push(
-          { node: item, value: file1[item], status: '1' },
-          { node: item, value: file2[item], status: '2' },
-        );
+  const makeDiffTree = (obj1, obj2) => {
+    const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
+    const diffTree = keys.map((key) => {
+      if (!_.has(obj2, key)) {
+        return { name: key, status: 'deleted', value: obj1[key] };
       }
-      return acc;
-    }, []);
-    return result;
+      if (!_.has(obj1, key)) {
+        return { name: key, status: 'added', value: obj2[key] };
+      }
+      if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
+        return { name: key, status: 'nested', children: makeDiffTree(obj1[key], obj2[key]) };
+      }
+      if (obj1[key] !== obj2[key]) {
+        return {
+          name: key,
+          status: 'changed',
+          previousValue: obj1[key],
+          currentValue: obj2[key],
+        };
+      }
+      return { name: key, status: 'unchanged', value: obj1[key] };
+    });
+    return diffTree;
   };
 
-  const diffTree = makeDiffTree(uniqueKeys, parsedData1, parsedData2);
+  const diffTree = makeDiffTree(parsedData1, parsedData2);
 
-  const diffString = diffTree.reduce((acc, { node, value, status }) => {
-    let tempAcc = acc;
-    if (status === 'stable') {
-      tempAcc += `    ${node}: ${value}\n`;
-    } else if (status === 'added') {
-      tempAcc += `  + ${node}: ${value}\n`;
-    } else if (status === 'deleted') {
-      tempAcc += `  - ${node}: ${value}\n`;
-    } else if (status === '1') {
-      tempAcc += `  - ${node}: ${value}\n`;
-    } else {
-      tempAcc += `  + ${node}: ${value}\n`;
-    }
-    return tempAcc;
-  }, '');
-  const result = `{\n${diffString}}`;
+  const stringify = (diff, replacer = ' ', spacesCount = 2) => {
+    const iter = (node, depth) => {
+      const intendSize = depth * spacesCount;
+      const currentIntend = replacer.repeat(intendSize);
+      const backquoteIntend = replacer.repeat(intendSize - spacesCount);
 
-  console.log(result);
+      const formattedTree = node.map((child) => {
+        if (child.status === 'added') {
+          return `${currentIntend}+ ${child.name}: ${child.value}`;
+        }
+        if (child.status === 'deleted') {
+          return `${currentIntend}- ${child.name}: ${child.value}`;
+        }
+        if (child.status === 'unchanged') {
+          return `${currentIntend}  ${child.name}: ${child.value}`;
+        }
+        if (child.status === 'changed') {
+          return `${currentIntend}- ${child.name}: ${child.previousValue}\n${currentIntend}+ ${child.name}: ${child.currentValue}`;
+        }
+        return `${currentIntend}  ${child.name}: ${iter(child.children, depth + 2)}`;
+      });
+      return ['{', ...formattedTree, `${backquoteIntend}}`].join('\n');
+    };
+    return iter(diff, 1);
+  };
+  console.log(stringify(diffTree));
 };
 
 export default gendiff;

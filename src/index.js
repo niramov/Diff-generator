@@ -85,7 +85,6 @@ const gendiff = (filepath1, filepath2) => {
     return iter(diff, 1);
   };
 
-  console.log(stringify(diffTree));
   return stringify(diffTree);
 };
 

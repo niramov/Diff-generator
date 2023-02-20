@@ -34,7 +34,7 @@ const stylish = (diff, replacer = ' ', spacesCount = 4) => {
           child.name
         }: ${isObject(child.currentValue, depth + 1)}`;
       }
-      return `${currentIntend}  ${child.name}: ${iter(child.children, depth + 1)}`;
+      return `${currentIntend}  ${child.name}: ${iter(child.value, depth + 1)}`;
     });
 
     return ['{', ...formattedTree, `${backquoteIntend}}`].join('\n');

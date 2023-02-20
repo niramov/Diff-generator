@@ -3,9 +3,9 @@ import _ from 'lodash';
 import { resolve } from 'node:path';
 import { cwd } from 'node:process';
 import parser from './parsers.js';
-import stylish from './formatter.js';
+import formatTo from './formatters/index.js';
 
-const gendiff = (filepath1, filepath2, format = stylish) => {
+const gendiff = (filepath1, filepath2, formatName = 'stylish') => {
   const dataRead = (filePath) => readFileSync(filePath, 'utf-8');
   const path1 = resolve(cwd(), filepath1);
   const path2 = resolve(cwd(), filepath2);
@@ -25,7 +25,7 @@ const gendiff = (filepath1, filepath2, format = stylish) => {
         return { name: key, status: 'added', value: obj2[key] };
       }
       if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
-        return { name: key, status: 'nested', children: makeDiffTree(obj1[key], obj2[key]) };
+        return { name: key, status: 'nested', value: makeDiffTree(obj1[key], obj2[key]) };
       }
       if (obj1[key] !== obj2[key]) {
         return {
@@ -41,6 +41,7 @@ const gendiff = (filepath1, filepath2, format = stylish) => {
   };
 
   const diffTree = makeDiffTree(parsedData1, parsedData2);
+  const format = formatTo(formatName);
   console.log(format(diffTree));
   return format(diffTree);
 };

@@ -6,6 +6,6 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b841b0e726d8f177b4ee/test_coverage)](https://codeclimate.com/github/niramov/frontend-project-lvl2/test_coverage)
 
-### Demonstration of gendiff work:
+### Gendiff work demonstration:
 
-[![asciicast](https://asciinema.org/a/XnhwlORZIBlnHnJn1zUN4qaUB.svg)](https://asciinema.org/a/XnhwlORZIBlnHnJn1zUN4qaUB)
+[![asciicast](https://asciinema.org/a/U9EBKR3GDdtH0Ujb1oWoDrTzc.svg)](https://asciinema.org/a/U9EBKR3GDdtH0Ujb1oWoDrTzc)

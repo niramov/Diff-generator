@@ -30,7 +30,7 @@ const stylish = (diff, replacer = ' ', spacesCount = 4) => {
         return `${currentIntend}  ${child.name}: ${isObject(child.value, depth + 1)}`;
       }
       if (child.status === 'changed') {
-        return `${currentIntend}- ${child.name}: ${isObject(child.previousValue, depth + 1)}\n${currentIntend}+ ${
+        return `${currentIntend}- ${child.name}: ${isObject(child.previusValue, depth + 1)}\n${currentIntend}+ ${
           child.name
         }: ${isObject(child.currentValue, depth + 1)}`;
       }

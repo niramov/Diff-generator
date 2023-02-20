@@ -37,3 +37,17 @@ test('test YML in plain format', () => {
 
   expect(result).toStrictEqual(expected);
 });
+
+test('test JSON in json format', () => {
+  const result = gendiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'json');
+  const expected = readFileSync(getFixturePath('json.txt'), 'utf-8');
+
+  expect(result).toStrictEqual(expected);
+});
+
+test('test YML in json format', () => {
+  const result = gendiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'json');
+  const expected = readFileSync(getFixturePath('json.txt'), 'utf-8');
+
+  expect(result).toStrictEqual(expected);
+});

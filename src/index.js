@@ -31,7 +31,7 @@ const gendiff = (filepath1, filepath2, formatName = 'stylish') => {
         return {
           name: key,
           status: 'changed',
-          previousValue: obj1[key],
+          previusValue: obj1[key],
           currentValue: obj2[key],
         };
       }

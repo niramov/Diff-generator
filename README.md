@@ -8,4 +8,4 @@
 
 ### Gendiff work demonstration:
 
-[![asciicast](https://asciinema.org/a/U9EBKR3GDdtH0Ujb1oWoDrTzc.svg)](https://asciinema.org/a/U9EBKR3GDdtH0Ujb1oWoDrTzc)
+[![asciicast](https://asciinema.org/a/R99VACN5YoXg6ldFhiuAqwbE9.svg)](https://asciinema.org/a/R99VACN5YoXg6ldFhiuAqwbE9)

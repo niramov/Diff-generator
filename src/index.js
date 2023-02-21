@@ -25,7 +25,7 @@ const gendiff = (filepath1, filepath2, formatName = 'stylish') => {
         return { name: key, status: 'added', value: obj2[key] };
       }
       if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
-        return { name: key, status: 'nested', value: makeDiffTree(obj1[key], obj2[key]) };
+        return { name: key, status: 'nested', children: makeDiffTree(obj1[key], obj2[key]) };
       }
       if (obj1[key] !== obj2[key]) {
         return {

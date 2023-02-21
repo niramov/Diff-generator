@@ -25,7 +25,7 @@ const plain = (diffTree) => {
         return `Property '${path + child.name}' was updated. From ${isObject(child.previusValue)}\
  to ${isObject(child.currentValue)}`;
       }
-      return iter(child.value, `${path}${child.name}.`);
+      return iter(child.children, `${path}${child.name}.`);
     });
     return [...formattedTree].join('\n');
   };

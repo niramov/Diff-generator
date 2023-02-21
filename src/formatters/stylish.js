@@ -11,11 +11,9 @@ const stylish = (diff, replacer = ' ', spacesCount = 4) => {
       const objIntendSize = objDepth * objSpacesCount;
       const objCurrentIntend = objReplacer.repeat(objIntendSize);
       const objBackquoteIntend = objReplacer.repeat(objIntendSize - objSpacesCount);
-      const result = [];
+
       const entries = Object.entries(val);
-      entries.forEach(([key, value]) => {
-        result.push(`${objCurrentIntend}${key}: ${isObject(value, objDepth + 1)}`);
-      });
+      const result = entries.map(([key, value]) => `${objCurrentIntend}${key}: ${isObject(value, objDepth + 1)}`);
       return ['{', ...result, `${objBackquoteIntend}}`].join('\n');
     };
 

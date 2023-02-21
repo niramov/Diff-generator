@@ -16,7 +16,7 @@ const gendiff = (filepath1, filepath2, formatName = 'stylish') => {
   const parsedData2 = parser(path2, data2);
 
   const makeDiffTree = (obj1, obj2) => {
-    const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
+    const keys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)));
     const diffTree = keys.map((key) => {
       if (!_.has(obj2, key)) {
         return { name: key, status: 'deleted', value: obj1[key] };

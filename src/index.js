@@ -14,7 +14,6 @@ const gendiff = (filepath1, filepath2, formatName = 'stylish') => {
 
   const diffTree = makeDiffTree(parsedData1, parsedData2);
   const format = formatTo(formatName);
-  console.log(format(diffTree));
   return format(diffTree);
 };
 

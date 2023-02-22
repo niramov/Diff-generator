@@ -1,8 +1,7 @@
 import yaml from 'js-yaml';
-import { extname } from 'node:path';
 
-const parse = (path, data) => {
-  switch (extname(path).substring(1)) {
+const parse = (data, extention) => {
+  switch (extention) {
     case 'json':
       return JSON.parse(data);
     case 'yml':

@@ -3,14 +3,16 @@ import stylish from './stylish.js';
 import json from './json.js';
 
 const formatTo = (format) => {
-  if (format === 'plain') {
-    return plain;
+  switch (format) {
+    case 'plain':
+      return plain;
+    case 'json':
+      return json;
+    case 'stylish':
+      return stylish;
+    default:
+      throw new Error('Not supported format!');
   }
-  if (format === 'json') {
-    return json;
-  }
-
-  return stylish;
 };
 
 export default formatTo;

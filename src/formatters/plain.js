@@ -1,15 +1,15 @@
+const isObject = (val) => {
+  if (typeof val === 'string') {
+    return `'${val}'`;
+  }
+  if (typeof val !== 'object' || val === null) {
+    return val;
+  }
+
+  return '[complex value]';
+};
+
 const plain = (diffTree) => {
-  const isObject = (val) => {
-    if (typeof val === 'string') {
-      return `'${val}'`;
-    }
-    if (typeof val !== 'object' || val === null) {
-      return val;
-    }
-
-    return '[complex value]';
-  };
-
   const iter = (node, path) => {
     const formattedTree = node.flatMap((child) => {
       if (child.status === 'added') {

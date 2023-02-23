@@ -23,9 +23,9 @@ const stylish = (diff) => {
         return `${countIndent(depth)}  ${child.name}: ${newNode}`;
       }
       if (child.status === 'changed') {
-        return `${countIndent(depth)}- ${child.name}: ${stringify(child.previusValue, depth + 1)}\n${countIndent(
-          depth
-        )}+ ${child.name}: ${stringify(child.currentValue, depth + 1)}`;
+        return `${countIndent(depth)}- ${child.name}: \
+${stringify(child.previusValue, depth + 1)}\n${countIndent(depth)}+ ${child.name}: \
+${stringify(child.currentValue, depth + 1)}`;
       }
       return `${countIndent(depth)}  ${child.name}: ${iter(child.children, depth + 1)}`;
     });

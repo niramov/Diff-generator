@@ -12,7 +12,7 @@
 
 Project - **Generator of difference**.
 
-Diff Calculator. This is a console utility that displays the differences between files. It can show differences in 3 formats. Supporting formats: JSON, YML, YAML
+This is a console utility that displays the differences between files. It can show differences in stylish, plain or json formats. Supporting file extentions: json, yml, yaml.
 
 ---
 

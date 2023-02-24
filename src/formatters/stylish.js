@@ -1,4 +1,5 @@
 const countIndent = (depth, spotter = 2) => ' '.repeat(depth * 4 - spotter);
+
 const stringify = (val, objDepth) => {
   if (typeof val !== 'object' || val === null) {
     return val;

@@ -10,6 +10,8 @@ const formatTo = (format) => {
       return json;
     case 'stylish':
       return stylish;
+    case '':
+      return stylish;
     default:
       throw new Error('Not supported format!');
   }

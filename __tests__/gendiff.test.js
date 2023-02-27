@@ -22,5 +22,5 @@ test.each(extension)('formatters', (ext) => {
   expect(gendiff(fileBefore, fileAfter, 'stylish')).toEqual(expectedStylish);
   expect(gendiff(fileBefore, fileAfter, 'plain')).toEqual(expectedPlain);
   expect(gendiff(fileBefore, fileAfter, 'json')).toEqual(expectedJson);
-  expect(gendiff(fileBefore, fileAfter, '')).toEqual(expectedStylish);
+  expect(gendiff(fileBefore, fileAfter, undefined)).toEqual(expectedStylish);
 });

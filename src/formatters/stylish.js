@@ -14,21 +14,20 @@ const stylish = (diff) => {
   const iter = (node, depth) => {
     const formattedTree = node.map((child) => {
       const newNode = stringify(child.value, depth + 1);
-      if (child.status === 'added') {
-        return `${countIndent(depth)}+ ${child.name}: ${newNode}`;
-      }
-      if (child.status === 'deleted') {
-        return `${countIndent(depth)}- ${child.name}: ${newNode}`;
-      }
-      if (child.status === 'unchanged') {
-        return `${countIndent(depth)}  ${child.name}: ${newNode}`;
-      }
-      if (child.status === 'changed') {
-        return `${countIndent(depth)}- ${child.name}: \
+      switch (child.status) {
+        case 'added':
+          return `${countIndent(depth)}+ ${child.name}: ${newNode}`;
+        case 'deleted':
+          return `${countIndent(depth)}- ${child.name}: ${newNode}`;
+        case 'unchanged':
+          return `${countIndent(depth)}  ${child.name}: ${newNode}`;
+        case 'changed':
+          return `${countIndent(depth)}- ${child.name}: \
 ${stringify(child.previusValue, depth + 1)}\n${countIndent(depth)}+ ${child.name}: \
 ${stringify(child.currentValue, depth + 1)}`;
+        default:
+          return `${countIndent(depth)}  ${child.name}: ${iter(child.children, depth + 1)}`;
       }
-      return `${countIndent(depth)}  ${child.name}: ${iter(child.children, depth + 1)}`;
     });
 
     return ['{', ...formattedTree, `${countIndent(depth, 4)}}`].join('\n');

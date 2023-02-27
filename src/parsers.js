@@ -9,7 +9,7 @@ const parse = (data, extention) => {
     case 'yaml':
       return yaml.load(data);
     default:
-      throw new Error('Invalid file format! Try supported formats.');
+      throw new Error(`Invalid file format ${extention}! Try supported formats.`);
   }
 };
 

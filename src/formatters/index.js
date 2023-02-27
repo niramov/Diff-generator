@@ -13,7 +13,7 @@ const formatTo = (format) => {
     case '':
       return stylish;
     default:
-      throw new Error('Not supported format!');
+      throw new Error(`Not supported format ${format}!`);
   }
 };
 

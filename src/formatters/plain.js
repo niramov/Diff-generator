@@ -1,4 +1,4 @@
-const isComplexValue = (val) => {
+const formatValue = (val) => {
   if (typeof val === 'string') {
     return `'${val}'`;
   }
@@ -13,7 +13,7 @@ const plain = (diffTree) => {
   const iter = (node, path) => {
     const formattedTree = node.flatMap((child) => {
       if (child.status === 'added') {
-        return `Property '${path + child.name}' was added with value: ${isComplexValue(child.value)}`;
+        return `Property '${path + child.name}' was added with value: ${formatValue(child.value)}`;
       }
       if (child.status === 'deleted') {
         return `Property '${path + child.name}' was removed`;
@@ -22,8 +22,8 @@ const plain = (diffTree) => {
         return [];
       }
       if (child.status === 'changed') {
-        return `Property '${path + child.name}' was updated. From ${isComplexValue(child.previusValue)}\
- to ${isComplexValue(child.currentValue)}`;
+        return `Property '${path + child.name}' was updated. From ${formatValue(child.previusValue)}\
+ to ${formatValue(child.currentValue)}`;
       }
       return iter(child.children, `${path}${child.name}.`);
     });

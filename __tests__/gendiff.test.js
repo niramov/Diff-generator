@@ -7,7 +7,7 @@ import gendiff from '../src/index.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const getFixturePath = (filename) => join(__dirname, '..', '_fixtures_', filename);
+const getFixturePath = (filename) => join(__dirname, '..', '__fixtures__', filename);
 
 const extension = ['yaml', 'yml', 'json'];
 

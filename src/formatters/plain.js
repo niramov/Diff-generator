@@ -12,20 +12,19 @@ const formatValue = (val) => {
 const plain = (diffTree) => {
   const iter = (node, path) => {
     const formattedTree = node.flatMap((child) => {
-      if (child.status === 'added') {
-        return `Property '${path + child.name}' was added with value: ${formatValue(child.value)}`;
-      }
-      if (child.status === 'deleted') {
-        return `Property '${path + child.name}' was removed`;
-      }
-      if (child.status === 'unchanged') {
-        return [];
-      }
-      if (child.status === 'changed') {
-        return `Property '${path + child.name}' was updated. From ${formatValue(child.previusValue)}\
+      switch (child.status) {
+        case 'added':
+          return `Property '${path + child.name}' was added with value: ${formatValue(child.value)}`;
+        case 'deleted':
+          return `Property '${path + child.name}' was removed`;
+        case 'unchanged':
+          return [];
+        case 'changed':
+          return `Property '${path + child.name}' was updated. From ${formatValue(child.previusValue)}\
  to ${formatValue(child.currentValue)}`;
+        default:
+          return iter(child.children, `${path}${child.name}.`);
       }
-      return iter(child.children, `${path}${child.name}.`);
     });
     return [...formattedTree].join('\n');
   };

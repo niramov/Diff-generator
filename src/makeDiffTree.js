@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const makeDiffTree = (obj1, obj2) => {
   const keys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)));
-  const diffTree = keys.map((key) => {
+  return keys.map((key) => {
     if (!_.has(obj2, key)) {
       return { name: key, status: 'deleted', value: obj1[key] };
     }
@@ -22,7 +22,6 @@ const makeDiffTree = (obj1, obj2) => {
     }
     return { name: key, status: 'unchanged', value: obj1[key] };
   });
-  return diffTree;
 };
 
 export default makeDiffTree;
